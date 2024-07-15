@@ -14,8 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/lovelysocialnetwork", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    //Got warning - these are now deprecated
 });
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
