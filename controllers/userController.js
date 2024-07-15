@@ -35,6 +35,21 @@ const userController = {
         })
     },
 
+    //Delete User
+    deleteUserById(req, res) {
+        User.findByOneAndUpdate(req.params.id)
+        .then((user) => {
+            if(!users) {
+                res.status(404).json({ message: "Not Found! "})
+            } else {
+                res.status(200).json({ message: "Users and associated thoughts deleted!" });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json(err)
+        })
+    },
+
     //Update User
     updateUserById(req, res) {
         User.findByOneAndUpdate(req.params.id, req.body, {
@@ -49,21 +64,6 @@ const userController = {
         })
         .catch((err) => {
             res.status(500).json(err);
-        })
-    },
-
-    //Delete User
-    deleteUserById(req, res) {
-        User.findByOneAndUpdate(req.params.id)
-        .then((user) => {
-            if(!users) {
-                res.status(404).json({ message: "Not Found! "})
-            } else {
-                res.status(200).json({ message: "Users and associated thoughts deleted!" });
-            }
-        })
-        .catch((err) => {
-            res.status(500).json(err)
         })
     },
 
