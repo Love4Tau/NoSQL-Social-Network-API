@@ -36,13 +36,13 @@ const userController = {
     },
 
     //Delete User
-    deleteUserById(req, res) {
-        User.findByOneAndUpdate(req.params.id)
-        .then((user) => {
+    deleteUser(req, res) {
+        User.findOneAndDelete(req.params.id)
+        .then((users) => {
             if(!users) {
-                res.status(404).json({ message: "Not Found! "})
+                res.status(404).json({ err, message: "Not Found! "})
             } else {
-                res.status(200).json({ message: "Users and associated thoughts deleted!" });
+                res.status(200).json({ users, message: "Users and associated thoughts deleted!" });
             }
         })
         .catch((err) => {
@@ -97,7 +97,7 @@ const userController = {
             if(!users) {
                 res.status(404).json({ message: "Not Found!" })
             } else {
-                res.status(200).json(users)
+                res.status(200).json({users, message: "You removed a friend!"})
             }
         })
         .catch((err) => {
