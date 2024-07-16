@@ -52,7 +52,7 @@ const userController = {
 
     //Update User
     updateUserById(req, res) {
-        User.findByOneAndUpdate(req.params.id, req.body, {
+        User.findOneAndUpdate(req.params.id, req.body, {
             new: true
         })
         .then((users) => {
