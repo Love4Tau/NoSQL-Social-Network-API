@@ -76,9 +76,9 @@ const thoughtController = {
 
     //Add-Create Reaction
     createReaction(req, res) {
-        Thought.findByIdAndUpdate(
+        Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
-            {$pull: {reactions: {reactionId: req.params.reactionId}}},
+            {$addToSet: {reactions: req.body}},
             {runValidators: true, new: true},
         )
         .then((thought) => {
@@ -96,10 +96,10 @@ const thoughtController = {
 
     //Delete Reaction
     deleteReaction(req, res) {
-        Thought.findByIdAndUpdate(
+        Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
             {$pull: {reactions: {reactionId: req.params.reactionId}}},
-            {runValidators: true, new: true},
+            {new: true},
         )
         .then((thought) => {
             if(!thought) {
