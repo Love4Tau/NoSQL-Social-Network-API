@@ -1,7 +1,12 @@
-const { connect, connection } = require('mongoose');
+// const { connect, connection } = require('mongoose');
+const mongoose = require("mongoose");
 
-const connectionString = 'mongodb://127.0.0.1:27017/lovelysocialnetwork';
+// const connectionString = process.env.MONGODB_URL;
+const connectionString = "mongodb://127.0.0.1:27017/socialnetwork";
 
-connect(connectionString);
+mongoose.connect(connectionString, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+});
 
-module.exports = connection;
+module.exports = mongoose.connection;

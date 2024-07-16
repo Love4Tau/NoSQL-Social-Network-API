@@ -1,6 +1,6 @@
 const { Thought, User } = require("../models");
 
-const thoughtController ={
+const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find({})
             .then((thoughts) => {
@@ -8,6 +8,7 @@ const thoughtController ={
             })
             .catch((err) => {
                 res.status(500).json(err)
+                console.log(err);
             })
     
     },
@@ -21,10 +22,12 @@ const thoughtController ={
                 res.status(404).json({ message: "Not found!" });
             } else {
                 res.status(200).json(thought);
+                console.log(err);
             }
         })
         .catch((err) => {
             res.status(500).json(err)
+            console.log(err);
         });
     },
 
@@ -33,9 +36,11 @@ const thoughtController ={
         Thought.create(req.body)
         .then((thought) => {
             res.status(200).json(thought);
+            console.log(thought)
         })
         .catch((err) => {
             res.status(500).json(err);
+            console.log(err);
         });
     },
 
@@ -43,10 +48,11 @@ const thoughtController ={
     deleteThought(req, res) {
         Thought.findByIdAndDelete({ _id: req.params.thoughtId })
         .then((thought) => {
-            res.status(200).json({ message: "Thought Deleted!" });
+            res.status(200).json({ thought, message: "Thought Deleted!" });
         })
         .catch((err) => {
             res.status(500).json(err);
+            console.log(err);
         })
     },
 
@@ -64,6 +70,7 @@ const thoughtController ={
         })
         .catch((err) => {
             res.status(500).json(err);
+            console.log(err);
         });
     },
 
@@ -83,6 +90,7 @@ const thoughtController ={
         })
         .catch((err) => {
             res.status(500).json(err);
+            console.log(err);
         });
     },
 
@@ -102,6 +110,7 @@ const thoughtController ={
         })
         .catch((err) => {
             res.status(500).json(err);
+            console.log(err);
         });
     },
 };
